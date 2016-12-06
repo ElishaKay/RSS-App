@@ -10,8 +10,27 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 
 	};
 
-	$scope.addToDB = function(){
-		
+	$scope.userinput = function(){
+		 src="js/xml2json.js"
+
+function fetchAndParseXML(url, success) {
+	$.ajax({
+	 	type: "GET",
+	 	url: url,
+	 	dataType: "xml",
+	 	success: function(data) {
+	 		success(xml2json(data));
+	 	}
+	 	});
+ 	}
+
+ 	fetchAndParseXML('cd_catalog.xml', function(data) {
+ 	console.log('hurray!', data);
+ 	
+ 	
+ 		})
+// Append "RSS Title" to #someElement 
+
 
 		
 	}
