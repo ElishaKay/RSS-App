@@ -12,6 +12,12 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 
 	$scope.addToDB = function(){
 		
+
+		
+	}
+
+	$scope.addToDB = function(){
+		
 		console.log('hey I got to the addToDB funct');
 
 		$http.post('/journey', {text: $scope.input}).success(function(response){
