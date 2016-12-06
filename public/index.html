@@ -123,7 +123,19 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="Medium.JPG" alt="User profile picture">
 
+              <br>
               
+              <div ng-app="journyApp">
+                <div ng-controller="journyCtrl">
+                  <div ng-repeat = "message in messages"> {{message.text}}</div>
+                  <input type="text" class="form-control" ng-model="input"></input>
+                  <button ng-click="addToDB()">Submit</button>
+
+                </div>  
+              </div>
+
+              <hr>
+
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
@@ -177,7 +189,7 @@
              
   <!-- /.col -->
 
-  
+
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -233,7 +245,13 @@
                         </span>
                   </li>
                   <!-- /.timeline-label -->
-             
+
+<!-- Stuff for the Angular App -->
+
+<script src="angular/angular.js"></script>
+<script src="js/app.js"></script>
+<script src="js/factory.js"></script>
+<script src="js/controller.js"></script>
 
 <!-- jQuery 2.2.3 -->
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>

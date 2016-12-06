@@ -13,7 +13,7 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 	$scope.userinput = function(){
 		 src="js/xml2json.js"
 
-function fetchAndParseXML(url, success) {
+	function fetchAndParseXML(url, success) {
 	$.ajax({
 	 	type: "GET",
 	 	url: url,
@@ -22,14 +22,19 @@ function fetchAndParseXML(url, success) {
 	 		success(xml2json(data));
 	 	}
 	 	});
- 	}
+ 		}
 
- 	fetchAndParseXML('cd_catalog.xml', function(data) {
- 	console.log('hurray!', data);
- 	
- 	
+ 		fetchAndParseXML('cd_catalog.xml', function(data) {
+ 			console.log('hurray!', data);
+		
+ 			// Append "RSS Title" to #someElement 
+
+ 			var JsonObject = data;
+
+ 			$('#hello').append(' world!');
+
  		})
-// Append "RSS Title" to #someElement 
+
 
 
 		
