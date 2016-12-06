@@ -1,7 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-	<title></title>
+	<title>XML Display</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
 </head>
 <body ng-app="journyApp">
 	<div ng-controller="journyCtrl">
@@ -14,7 +21,24 @@
 	<script src="js/app.js"></script>
 	<script src="js/factory.js"></script>
 	<script src="js/controller.js"></script>
+	<script type="text/javascript" src="js/xml2json.js"></script>
+<script type="text/javascript">
+function fetchAndParseXML(url, success) {
+$.ajax({
+	 	type: "GET",
+	 	url: url,
+	 	dataType: "xml",
+	 	success: function(data) {
+	 		success(xml2json(data));
+	 	}
+	 	});
+ }
 
+ fetchAndParseXML('cd_catalog.xml', function(data) {
+ 	console.log('hurray!', data);
+ })
+// Append "RSS Title" to #someElement 
+</script>
 
 </body>
 </html>
