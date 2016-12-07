@@ -63,7 +63,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">Favorite Authors</li>
         
         
 
@@ -86,12 +86,16 @@
         
 
 
-        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-      </ul>
+       
+        <li class="header">Favorite Channels</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Ynet Sports</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>NBA.com</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Maccabi Tel Aviv</span></a></li>
+
+
+    <li class="header">Extras</li>
+     <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+           </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
@@ -102,10 +106,8 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 align="center">
-        Custom RSS Reader
-      </h1>
-      
+      <img style="font-family:Verdana" align="center" src="img/logo1.png">
+        
     </section>
 
     <!-- Main content -->
@@ -122,50 +124,86 @@
               <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-              <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">Submit Feeds</a></li>
+              <li><a href="#timeline" data-toggle="tab">Browse Latest Articles</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
-                
+              
+                <!-- Beginning of NG-App -->
+
+                <div ng-app="journyApp">
+                <div ng-controller="journyCtrl">
+
+
                 <!-- Post -->
                 <div class="post clearfix">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="img/Medium.JPG" alt="User Image">
                         <span class="username">
-                          <a href="#">Sarah Ross</a>
+                          <a href="#">Elisha and Aviv</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
-                    <span class="description">Sent you a message - 3 days ago</span>
+                    <span class="description">Sent you a message - 5 minutes ago</span>
                   </div>
                   <!-- /.user-block -->
                   <p>
-       Get ready to Create Your Custom RSS Reader. Type in the URL's of your Favorite RSS Feeds. We'll take of the rest. </p>
+       Create Your Custom RSS Reader. Type in the URL's of your Favorite RSS Feeds. We'll take of the rest.</p>
 
                   <form class="form-horizontal">
                     <div class="form-group margin-bottom-none">
                       <div class="col-sm-9">
-                        <input class="form-control input-sm" placeholder="Response">
-                      </div>
-                      <div class="col-sm-3">
-                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
+
+                        <div ng-repeat = "message in messages"> {{message.text}}</div>
+                        <input class="form-control input-sm" placeholder="RSS Feed URL: example: http://www.ynet.co.il/Integration/StoryRss3.xml" type="text" class="form-control" ng-model="input"></input>
+                        
+                         </div>
+
+                        <div class="col-sm-3">
+
+                        <button type="submit" class="btn btn-danger pull-right  btn-block btn-sm" ng-click="addToDB()">Submit</button>
+
+ 
                       </div>
                     </div>
                   </form>
+
+                  <br>
+                  
+                  <form class="form-horizontal">
+                    <div class="form-group margin-bottom-none">
+                      <div class="col-sm-9">
+                        <input class="form-control input-sm" placeholder="RSS Feed URL">
+                      </div>
+                      <div class="col-sm-3">
+                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+
+                  <br>
+                  
+                 <form class="form-horizontal">
+                    <div class="form-group margin-bottom-none">
+                      <div class="col-sm-9">
+                        <input class="form-control input-sm" placeholder="RSS Feed URL">
+                      </div>
+                      <div class="col-sm-3">
+                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+
+
+
                 </div>
                 <!-- /.post -->
                  </div>
 
-              <img class="profile-user-img img-responsive img-circle" src="Medium.JPG" alt="User profile picture">
-
               <br>
               
-              <div ng-app="journyApp">
-                <div ng-controller="journyCtrl">
-                  <div ng-repeat = "message in messages"> {{message.text}}</div>
-                  <input type="text" class="form-control" ng-model="input"></input>
-                  <button ng-click="addToDB()">Submit</button>
+              
+                  
 
                 </div>  
               </div>
@@ -175,9 +213,9 @@
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="dist/img/user2-160x160.jpg" alt="User Image">
                         <span class="username">
-                          <a href="#">Adam Jones</a>
+                          <a href="#">Your Top Content</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">Posted 5 photos - 5 days ago</span>
@@ -187,7 +225,7 @@
                     <div class="col-sm-6">
 
 
-                      <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                      <img class="img-responsive" src="img/andy.JPG" alt="Photo">
                     </div>
 
                     <div class="col-sm-6">
@@ -213,13 +251,13 @@
                     <div class="col-sm-6">
                       <div class="row">
                         <div class="col-sm-6">
-                          <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
+                          <img class="img-responsive" src="img/steve.jpg" alt="Photo">
                           <br>
                           <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
-                          <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
+                          <img class="img-responsive" src="img/bball.jpg" alt="Photo">
                           <br>
                           <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
                         </div>

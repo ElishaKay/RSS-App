@@ -7,43 +7,11 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 				console.log($scope.messages);
 
 		});
-
 	};
 
+	
 	$scope.userinput = function(){
-		 src="js/xml2json.js"
-
-	function fetchAndParseXML(url, success) {
-	$.ajax({
-	 	type: "GET",
-	 	url: url,
-	 	dataType: "xml",
-	 	success: function(data) {
-	 		success(xml2json("<p>data</p>"));
-	 	}
-	 	});
- 		}
-
- 		fetchAndParseXML('cd_catalog.xml', function(data) {
- 			console.log('hurray!', data);
-		
- 			// Append "RSS Title" to #someElement 
-
- 			var JsonObject = data;
-
- 			debugger;
-
-
- 			$('.RSS Bucket').append(data);
-
-
- 		})
-
-
-
-		
-	}
-
+		 
 	$scope.addToDB = function(){
 		
 		console.log('hey I got to the addToDB funct');
@@ -52,10 +20,8 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 			console.log('heeeyyy')
 			console.log(response);
 		});
-
 		getAllDB();
-
 	}
-	
+	}
 
 });
