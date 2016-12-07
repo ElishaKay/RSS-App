@@ -1,4 +1,4 @@
-app.controller('journyCtrl', function($scope, journyFact,$http){
+app.controller('journyCtrl', function($scope, journyFact, $http){
 
 	$scope.addLinkToDB = function(){
 
@@ -6,7 +6,7 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 
 	$http.post('/addlink', {text: $scope.input}).success(function(response){
 			console.log('heeeyyy')
-			console.log(response);
+			// console.log(response);
 		});
 
 	$http.get("http://www.ynet.co.il/Integration/StoryRss3.xml",
