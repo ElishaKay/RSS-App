@@ -1,5 +1,26 @@
 app.controller('journyCtrl', function($scope, journyFact,$http){
 
+	$scope.addLinkToDB = function(){
+
+	console.log('addLinkToDB function was registered');
+
+	$http.post('/addlink', {text: $scope.input}).success(function(response){
+			console.log('heeeyyy')
+			console.log(response);
+		});
+
+	$http.get("http://www.ynet.co.il/Integration/StoryRss3.xml",
+	{
+		transformResponse: function (cnv) {
+			var x2js = new X2JS();
+			var aftCnv = x2js.xml_str2json(cnv);
+			return aftCnv;
+		}
+	}).success(function (response) {
+		console.log(response);
+	});
+    }
+
 	var getAllDB = function() {
 
 		$http.get('/getAll').success(function(response){
@@ -7,11 +28,9 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 				console.log($scope.messages);
 
 		});
+
 	};
 
-	
-	$scope.userinput = function(){
-		 
 	$scope.addToDB = function(){
 		
 		console.log('hey I got to the addToDB funct');
@@ -20,8 +39,10 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 			console.log('heeeyyy')
 			console.log(response);
 		});
+
 		getAllDB();
+
 	}
-	}
+	
 
 });

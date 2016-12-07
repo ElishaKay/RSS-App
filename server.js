@@ -20,16 +20,20 @@ app.post('/journey',function(req,res){
 	message.save();
 	res.send('success!');
 })
-app.get('/getAll',function(req,res){
 
+app.post('/addlink',function(req,res){
+	console.log('The Server spoke with the Controller');
+	var message = new Message(req.body);
+	message.save();
+	res.send('success!');
+})
+
+app.get('/getAll',function(req,res){
 	Message.find(function(err,messages){
 		console.log('hello from the find');
 		console.log(messages);
 		res.send(messages);
-
 	})
-	
-
 })
 
 app.listen(8000);

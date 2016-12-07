@@ -25,14 +25,16 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-<script
+  <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
-<script
+  <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+
+  <script src="js/xml2json.js"></script>
 
 </head>
 
@@ -148,24 +150,19 @@
                   </div>
                   <!-- /.user-block -->
                   <p>
-       Create Your Custom RSS Reader. Type in the URL's of your Favorite RSS Feeds. We'll take of the rest.</p>
+                   Create Your Custom RSS Reader. Type in the URL's of your Favorite RSS Feeds. We'll take of the rest.</p>
 
                   <form class="form-horizontal">
                     <div class="form-group margin-bottom-none">
                       <div class="col-sm-9">
 
                         <div ng-repeat = "message in messages"> {{message.text}}</div>
-                        <input class="form-control input-sm" placeholder="RSS Feed URL: example: http://www.ynet.co.il/Integration/StoryRss3.xml" type="text" class="form-control" ng-model="input"></input>
+                        <input type="text" class="form-control input-sm" placeholder="RSS Feed URL: example: http://www.ynet.co.il/Integration/StoryRss3.xml"  ng-model="input"></input>
                         
-                         </div>
+                        <button class="btn btn-danger pull-right  btn-block btn-sm" ng-click= "addLinkToDB()">Submit</button>
 
-                        <div class="col-sm-3">
-
-                        <button type="submit" class="btn btn-danger pull-right  btn-block btn-sm" ng-click="addToDB()">Submit</button>
-
- 
+                         </div> 
                       </div>
-                    </div>
                   </form>
 
                   <br>
@@ -328,6 +325,12 @@
 <script src="plugins/chartjs/Chart.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+
+ 
+      
+      
+         
+
 
 </body>
 </html>
