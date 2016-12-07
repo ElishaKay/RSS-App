@@ -19,7 +19,7 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 	 	url: url,
 	 	dataType: "xml",
 	 	success: function(data) {
-	 		success(xml2json(data));
+	 		success(xml2json("<p>data</p>"));
 	 	}
 	 	});
  		}
@@ -31,7 +31,11 @@ app.controller('journyCtrl', function($scope, journyFact,$http){
 
  			var JsonObject = data;
 
- 			$('#hello').append(' world!');
+ 			debugger;
+
+
+ 			$('.RSS Bucket').append(data);
+
 
  		})
 
