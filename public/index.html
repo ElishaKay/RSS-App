@@ -157,12 +157,15 @@
                       <div class="col-sm-9">
 
                         <div ng-repeat = "message in messages"> {{message.text}}</div>
-                        <input type="text" class="form-control input-sm" placeholder="RSS Feed URL: example: http://www.ynet.co.il/Integration/StoryRss3.xml"  ng-model="input"></input>
-                        
-                        <button class="btn btn-danger pull-right  btn-block btn-sm" ng-click= "addLinkToDB()">Submit</button>
+                        <input type="text" class="form-control input-sm" placeholder="ex: http://www.ynet.co.il/Integration/StoryRss3.xml"  ng-model="input"></input>
+                        </div>
+                       <div class="col-sm-3">
+                        <button id="DisplayContent" type="submit" class="btn btn-danger pull-right btn-block btn-sm" ng-click= "addLinkToDB()">Submit</button>
+                 </div>
+                  </div>
+                         
+                  
 
-                         </div> 
-                      </div>
                   </form>
 
                   <br>
@@ -207,8 +210,12 @@
 
               <hr>
 
+              <!-- Filler Content -->
+              <div id= "DisplayContent">
+                
                 <!-- Post -->
-                <div class="post">
+
+                <div  id="ContentFiller" class="post">
                   <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="dist/img/user2-160x160.jpg" alt="User Image">
                         <span class="username">
@@ -275,17 +282,209 @@
                         (5)</a></li>
                   </ul>
 
-                  <input class="form-control input-sm" type="text" placeholder="Type a comment">
+
+      
+<div id="images"></div>
+
+
+
+<table id="topic_table">
+  <tr>
+    <th><h3>Content</h3> </th>
+  </tr>
+  <tr id="content">
+    <td id="content_data"> </td>
+    <td> </td>
+  </tr>
+
+
+ </table>
+
+<div id="jsontextbaby"></div>
+
+
+
+<table id="topic_table2">
+  <tr>
+    <th><h3></h3> </th>
+  </tr>
+  <tr id="content">
+    <td id="content_data2"> </td>
+    <td> </td>
+  </tr>
+
+
+ </table>
+
+<div id="content_data"></div>
+
+<!-- Closing FillerContentDiv -->
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+
+  $( "#DisplayContent" ).click(function() {
+  $( "#ContentFiller" ).toggle( "slow", function() {
+    // Animation complete.
+  });
+    });
+
+  (function() {
+  var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  $.getJSON( flickerAPI, {
+    tags: "snowboarding",
+    tagmode: "any",
+    format: "json"
+  })
+  .done(function( data ) {
+    $.each( data.items, function( i, item ) {
+      $( "<img/>" ).attr( "src", item.media.m ).appendTo( "#images" );
+      if ( i === 3 ) {
+        return false;
+      }
+    });
+  });
+})();
+
+  // retrieve the JSON data from the URL
+  // we have to use JSONP since the URL resides on another domain
+  // API to the $.ajax function: http://api.jquery.com/jQuery.ajax/
+  $.ajax({
+    url: 'http://cooktv.sndimg.com/webcook/sandbox/perf/topics.json',
+    dataType: 'jsonp',
+    jsonpCallback: 'callback', // since it's JSONP this value needs to be the same name as their callback function / it's at the beginning of the JSON
+    success: function(json) {
+      processTopics(json.topics);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert(textStatus + ' : ' + errorThrown);
+    }
+  });
+  
+  // Process the topics
+  // param: topics - an array of topics
+  function processTopics(topics) {
+    
+    // API to the $.each function: http://api.jquery.com/jQuery.each/
+    $.each(topics, function(index, topic) {
+      
+      // Show the topic name in the HTML
+      $('#topic_table').append("<tr><td><a href='#' class='topic " + topic.name + "'>" + topic.name + "</a></td></tr>");
+      
+      // Store the content information - we can retrieve the content from the topic name
+      // API to the $.data function: http://api.jquery.com/data/
+      $('body').data(topic.name, topic.content);
+      
+      // add the anchor click event
+      addClickEvent(topic.name);
+      
+    });
+  }
+  
+  // Adds a click event that switches the content when clicking on the topic link
+  // param: topic_name - the name of the topic
+  function addClickEvent(topic_name) {
+    
+    $('.' + topic_name).click(function() {
+        
+      // clear out the content area
+      $('#content_data').html('');
+        
+      // retrieve the content data associated to the topic
+      var topic_content = $('body').data(topic_name);
+        
+      // iterate through the content links and display
+      showLinks(topic_content);
+        
+      // cancel the link click action
+      return false;
+    });    
+  }
+  
+  // show the link data
+  // param: topic_content - array of link data
+  function showLinks(topic_content) {
+    
+    // iterate through the content links and display
+    $.each(topic_content, function(i, content) {
+      
+      // create the link data
+      var link = '<a target="_blank" href="' + content.link_src + '">' + content.link_text + '</a>';
+      
+      // show the link data in the HTML
+      $('#content_data').append(link).append('<br />');
+    });
+  }
+  
+
+function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+    }
+
+
+
+function fetchAndParseXML(url, success) {
+  $.ajax({
+    type: "GET",
+    url: url,
+    dataType: "xml",
+    success: function(data) {
+      success(xml2json(data));
+    }
+    });
+     }
+  fetchAndParseXML('ynet.xml', function(data) {
+    console.log('hurray!', data);
+    // var stringified = syntaxHighlight(data);
+    // $('#jsontextbaby').append(stringified);
+    debugger;     
+      });
+
+  
+});
+
+
+  
+ 
+// Append "RSS Title" to #someElement 
+</script>
+                  
+                    <div class="col-sm-6">
+
+
+                      <img class="img-responsive" src="img/test23.jpg" alt="Photo">
+                    </div>
+ 
+              
+                  <!-- <input class="form-control input-sm" type="text" placeholder="Type a comment"> -->
                 </div>
                 <!-- /.post -->
              
-             
+      
+
   <!-- /.col -->
 
-
-        
-
-          
 
            <!-- /.tab-pane -->
               <div class="tab-pane" id="timeline">
@@ -294,10 +493,13 @@
                   <!-- timeline time label -->
                   <li class="time-label">
                         <span class="bg-red">
-                          10 Feb. 2014
+                          8 Dec. 2016
                         </span>
                   </li>
+              </div>
                   <!-- /.timeline-label -->
+
+
 
 <!-- Stuff for the Angular App -->
 
@@ -328,9 +530,7 @@
 <script src="dist/js/demo.js"></script>
 
  
-      
-      
-         
+  
 
 
 </body>

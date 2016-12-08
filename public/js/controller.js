@@ -1,4 +1,4 @@
-app.controller('journyCtrl', function($scope, journyFact, $http){
+app.controller('journyCtrl', function($scope, journyFact,$http){
 
 	$scope.addLinkToDB = function(){
 
@@ -9,7 +9,7 @@ app.controller('journyCtrl', function($scope, journyFact, $http){
 			// console.log(response);
 		});
 
-	$http.get("http://www.ynet.co.il/Integration/StoryRss3.xml",
+	$http.get("https://medium.com/feed/the-story/tagged/medium-update",
 	{
 		transformResponse: function (cnv) {
 			var x2js = new X2JS();
