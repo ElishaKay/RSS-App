@@ -131,7 +131,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Search For Films</a></li>
               <li><a href="#timeline" data-toggle="tab">Browse Latest Articles</a></li>
-              <li><a href="#filmline" data-toggle="tab">Search for A Film</a></li>
+              <li><a href="#filmline" data-toggle="tab">Find Magazines</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -144,19 +144,7 @@
 
                 <!-- Post -->
                 <div class="post clearfix">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="img/Medium.JPG" alt="User Image">
-                        <span class="username">
-                          <a href="#">Elisha and Aviv</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                    <span class="description">Sent you a message - 5 minutes ago</span>
-                  </div>
-                  <!-- /.user-block -->
-                  <p>
-                   Create Your Custom RSS Reader. Type in the URL's of your Favorite RSS Feeds. We'll take of the rest.</p>
-
-
+                  
                     <div class="container-fluid outerdiv" ng-app="journyApp" ng-controller="MovieController">
 
 
@@ -593,12 +581,21 @@ function fetchAndParseXML(url, success) {
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
                   <li class="time-label">
-                        <span class="bg-red">
-                          8 Dec. 2016
+                      
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="img/Medium.JPG" alt="User Image">
+                        <span class="username">
+                          <a href="#">Elisha and Aviv</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
-                  </li>
-              </div>
+                    <span class="description">Sent you a message - 5 minutes ago</span>
+                  </div>
+                  <!-- /.user-block -->
+                  <p>
+                   Create Your Custom RSS Reader. Type in the URL's of your Favorite RSS Feeds. We'll take of the rest.</p>
 
+              </div>
+              </li>
               <!-- /.filmline-label -->
 
 
